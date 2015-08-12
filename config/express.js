@@ -51,7 +51,7 @@ module.exports = function (mongooseConnection) {
     app.use(express.static(path.join(config.basePath, config.publicStatic)));
 
     if (config.favicon) {
-        app.use(favicon(config.resourcePath('core', 'favicon.ico')));
+        app.use(favicon(config.resourcePath('icon', 'favicon.ico')));
     }
 
     app.use(cookieParser());
