@@ -3,6 +3,7 @@
 var config = require('./config'),
     process = require('process'),
     colors = require('colors'),
+    moment = require('moment'),
     morgan = require('morgan');
 
 module.exports = {};
@@ -27,17 +28,17 @@ var sStream = {
 
 var morganLogger = morgan(config.morganFormat, {stream: sStream});
 var loggerLevels = {ALL: 0, INFO: 1, WARN: 2, ERROR: 3, FATAL: 4};
-var loggerColors = {INFO: 'white', WARN: 'yellow', ERROR: 'magenta', FATAL: 'red'};
+var loggerColors = {INFO: 'cyan', WARN: 'yellow', ERROR: 'magenta', FATAL: 'red'};
 
 var log = module.exports.log = function (level, message, error, data) {
     var leval = loggerLevels[level],
-        time = (new Date()).toISOString(),
-    color = loggerColors[level];
+        time = moment().format('HH:mm:ss').gray,
+        clr = loggerColors[level];
     if (error && !data) data = {};
     else if (!data) data = '';
     if (error) data.error = error;
     if (leval >= loggerLevels[config.loggerVerboseLevel]) {
-        config.loggerMethod('[' + level[color] + '] ' + message + (' [' + time + ']').grey, data);
+        config.loggerMethod('[' + time + '] [' + level[clr] + '] ' + message, data);
     }
     if (error) config.loggerMethod(error.stack);
     if (leval >= loggerLevels[config.loggerDieLevel]) {
@@ -70,4 +71,3 @@ module.exports.logInfo = function (message, data) {
 module.exports.logWarn = function (message, data) {
     log('WARN', message, null, data);
 };
-
