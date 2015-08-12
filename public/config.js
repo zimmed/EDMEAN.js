@@ -10,7 +10,9 @@
         applicationName: 'EDMEAN',
 
         applicationDependencies: [
-            'ngResource'
+            'ngResource',
+            'ngAnimate',
+            'ui.bootstrap'
         ],
 
         moduleConstants: {
