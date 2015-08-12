@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     config = require('./config/config');
 
-var sassDir = './app/styles', bowerDir = './public/lib';
+var bowerDir = config.resourcePath('bower');
 
 gulp.task('serve', function () {
     require('./server');
@@ -21,10 +21,10 @@ gulp.task('icons', function () {
 });
 
 gulp.task('css', function () {
-    return sass(sassDir + '/main.sass', {
+    return sass('./app/styles/' + config.sassMain + '.' + config.sassScss, {
         style: 'compressed',
         loadPath: [
-            sassDir,
+            './app/styles',
             bowerDir + '/bootstrap-sass-official/assets/stylesheets',
             bowerDir + '/fontawesome/scss',
         ]

@@ -38,9 +38,12 @@ module.exports = (function (appState) {
                 'image': 'res/images',
                 'style': 'res/styles',
                 'script': 'res/scripts',
-                'data': 'res/json'
+                'data': 'res/json',
+                'bower': 'lib'
             },
             favicon: 'favicon.ico',
+            sassScss: 'sass',
+            sassMain: 'main',
 
             locals: {
                 title: 'EDMEAN.js Application',
