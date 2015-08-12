@@ -26,10 +26,12 @@ module.exports = function (mongooseConnection) {
 
     _.extend(app.locals, config.locals);
     app.locals.port = config.serverPort;
+    app.locals.secure = config.secure;
 
     // Passing the request url to environment locals
     app.use(function (req, res, next) {
         res.locals.url = req.protocol + '://' + req.headers.host + req.url;
+        req.assets = config.assets;
         next();
     });
 

@@ -1,7 +1,10 @@
 'use strict';
 
+var APP_ENVIRONMENT_STATE = 'develop';
+
 var _ = require('lodash'),
-    path = require('path');
+    path = require('path'),
+    assets = require('./assets');
 
 module.exports = (function (appState) {
 
@@ -37,7 +40,6 @@ module.exports = (function (appState) {
                 'font': 'res/fonts',
                 'image': 'res/images',
                 'style': 'res/styles',
-                'script': 'res/scripts',
                 'data': 'res/json',
                 'bower': 'lib'
             },
@@ -55,6 +57,8 @@ module.exports = (function (appState) {
             },
 
             basePath: (function () { return path.join(__dirname, '..'); })(),
+
+            assets: parseAssets(assets, appState, path.join(this.basePath, this.publicStatic)),
 
             /** Default Methods **/
             resourcePath: function (module, file) {
@@ -76,4 +80,52 @@ module.exports = (function (appState) {
 
     return _.merge(defaults, config);
 
-})('develop');
+})(APP_ENVIRONMENT_STATE);
+
+function parseAssets (assets, appState, cwd) {
+    var key, js = [], css = [], all = assets.all, state;
+
+    if ((state = assets[appState])) {
+        if (state.js) _.extend(all.js, state.js);
+        if (state.css) _.extend(all.css, state.css);
+        if (state.vendor) {
+            if (state.vendor.js) _.extend(all.vendor.js, state.vendor.js);
+            if (state.vendor.css) _.extend(all.vendor.css, state.vendor.css)
+        }
+    }
+
+    for (key in all.js) {
+        if (all.js.hasOwnProperty(key)) {
+            js.concat(getFiles(all.js[key], cwd));
+        }
+    }
+    for (key in all.vendor.js) {
+        if (all.vendor.js.hasOwnProperty(key)) {
+            js.concat(getFiles(all.vendor.js[key], cwd));
+        }
+    }
+    for (key in all.css) {
+        if (all.css.hasOwnProperty(key)) {
+            css.concat(getFiles(all.css[key], cwd));
+        }
+    }
+    for (key in all.vendor.css) {
+        if (all.vendor.css.hasOwnProperty(key)) {
+            css.concat(getFiles(all.vendor.css[key], cwd));
+        }
+    }
+
+    return {js: js, css: css};
+}
+
+function getFiles(mixed, cwd) {
+    var files = [];
+    if (Array.isArray(mixed)) {
+        for (var i = 0, l = mixed.length; i < l; i++) {
+            files.concat(getFiles(mixed[i]));
+        }
+    } else if (typeof(mixed) === 'string') {
+        files = glob.sync(mixed, {cwd: cwd});
+    }
+    return files;
+}
