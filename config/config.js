@@ -59,8 +59,6 @@ module.exports = (function (appState) {
 
             basePath: (function () { return path.join(__dirname, '..'); })(),
 
-            assets: parseAssets(assets, appState, path.join(this.basePath, this.publicStatic)),
-
             /** Default Methods **/
             resourcePath: function (module, file) {
                 if (!file) file = '';
@@ -79,7 +77,9 @@ module.exports = (function (appState) {
         }
     }
 
-    return _.merge(defaults, config);
+    defaults = _.merge(defaults, config);
+    defaults.assets = parseAssets(assets, appState, path.join(defaults.basePath, defaults.publicStatic));
+    return defaults;
 
 })(APP_ENVIRONMENT_STATE);
 
@@ -123,10 +123,13 @@ function getFiles(mixed, cwd) {
     var files = [];
     if (Array.isArray(mixed)) {
         for (var i = 0, l = mixed.length; i < l; i++) {
-            files.concat(getFiles(mixed[i]));
+            files.concat(getFiles(mixed[i], cwd));
         }
     } else if (typeof(mixed) === 'string') {
-        files = glob.sync(mixed, {cwd: cwd});
+        if (mixed.indexOf('*') === -1) files.push(mixed);
+        else {
+            files = glob.sync(mixed, {cwd: cwd});
+        }
     }
     return files;
 }
