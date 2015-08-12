@@ -35,6 +35,7 @@ module.exports = (function (appState) {
             },
             sessionName: 'connect.sid',
 
+            angularAppName: 'MEAN',
             publicStatic: 'public',
             resource: {
                 'icon': 'res/icons',

@@ -15,5 +15,5 @@ module.exports = {
 
     sessionCookie: {secure: false, maxAge: 15 * 60 * 1000},
 
-    locals: {title: 'EDMEAN.js Application | Under Construction'}
+    locals: {title: 'EDMEAN.js Application | Dev'}
 };

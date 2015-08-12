@@ -27,6 +27,7 @@ module.exports = function (mongooseConnection) {
     _.extend(app.locals, config.locals);
     app.locals.port = config.serverPort;
     app.locals.secure = config.secure;
+    app.locals.angularAppName = config.angularAppName;
 
     // Passing the request url to environment locals
     app.use(function (req, res, next) {

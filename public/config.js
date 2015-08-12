@@ -7,7 +7,7 @@
     var config = {
         /** Application Configuration Setup **/
 
-        applicationName: 'EDMEAN',
+        applicationName: appLocals.angularAppName,
 
         applicationDependencies: [
             'ngResource',
@@ -15,9 +15,11 @@
             'ui.bootstrap'
         ],
 
-        moduleConstants: {
-            scriptsPath: 'lib/',
-            partialsPath: 'partials/'
+        moduleConstants: function (moduleName) {
+            return {
+                partialsPath: 'partials/',
+                modulePath: 'modules/' + moduleName + '/'
+            };
         },
 
         appConstants: {
@@ -55,7 +57,7 @@
             ngModule = angular.module(
                 ngModuleName,
                 (dependencies || [])
-            ).constant('modConfig', config.moduleConstants);
+            ).constant(name + 'Config', config.moduleConstants(name));
 
             application.requires.push(ngModuleName);
 

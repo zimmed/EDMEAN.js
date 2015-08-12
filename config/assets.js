@@ -9,6 +9,7 @@ module.exports = {
             js: {
                 socketio: '/socket.io/socket.io.js',
                 angular: 'lib/angular/angular.js',
+                angular_resource: 'lib/angular-resource/angular-resource.js',
                 angular_animate: 'lib/angular-animate/angular-animate.js',
                 angular_bootstrap: 'lib/angular-bootstrap/ui-bootstrap.js'
             },
@@ -36,6 +37,7 @@ module.exports = {
         vendor: {
             js: {
                 angular: 'lib/angular/angular.min.js',
+                angular_resource: 'lib/angular-resource/angular-resource.min.js',
                 angular_animate: 'lib/angular-animate/angular-animate.min.js',
                 angular_bootstrap: 'lib/angular-bootstrap/ui-bootstrap.min.js'
             }

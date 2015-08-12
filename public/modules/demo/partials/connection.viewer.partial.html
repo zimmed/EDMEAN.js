@@ -1,0 +1,10 @@
+<div class="panel-body" ng-controller="DemoConnectionController">
+    <p>
+        Status:
+        <span style="color:red" ng-show="!connected">Offline</span>
+        <span style="color:green" ng-show="connected">Connected</span>
+    </p>
+    <p>
+        Number of active clients: <span style="font-weight:bold" ng-bind="numConnected"></span>
+    </p>
+</div>

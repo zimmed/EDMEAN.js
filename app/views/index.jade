@@ -1,5 +1,14 @@
 extends layout
 
 block content
-    h2= locals.title
-    h4= locals.description
+    .row.text-center
+        .col-md-12.jumbotron
+            h1= locals.title
+            p= locals.description
+    .row
+        .col-md-7.text-right
+            h3 Time to build a site. The World Wide Web is your oyster.
+            p Engine built by zimmed@zimmed.io.
+        .col-md-1
+        .col-md-4.panel.text-left(demo-connection-viewer)
+
