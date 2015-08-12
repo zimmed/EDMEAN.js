@@ -4,6 +4,7 @@ var APP_ENVIRONMENT_STATE = 'develop';
 
 var _ = require('lodash'),
     path = require('path'),
+    glob = require('glob'),
     assets = require('./assets');
 
 module.exports = (function (appState) {
