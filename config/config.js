@@ -95,27 +95,27 @@ function parseAssets (assets, appState, cwd) {
         }
     }
 
-    for (key in all.js) {
-        if (all.js.hasOwnProperty(key)) {
-            js.concat(getFiles(all.js[key], cwd));
-        }
-    }
+
     for (key in all.vendor.js) {
         if (all.vendor.js.hasOwnProperty(key)) {
-            js.concat(getFiles(all.vendor.js[key], cwd));
-        }
-    }
-    for (key in all.css) {
-        if (all.css.hasOwnProperty(key)) {
-            css.concat(getFiles(all.css[key], cwd));
+            js = js.concat(getFiles(all.vendor.js[key], cwd));
         }
     }
     for (key in all.vendor.css) {
         if (all.vendor.css.hasOwnProperty(key)) {
-            css.concat(getFiles(all.vendor.css[key], cwd));
+            css = css.concat(getFiles(all.vendor.css[key], cwd));
         }
     }
-
+    for (key in all.js) {
+        if (all.js.hasOwnProperty(key)) {
+            js = js.concat(getFiles(all.js[key], cwd));
+        }
+    }
+    for (key in all.css) {
+        if (all.css.hasOwnProperty(key)) {
+            css = css.concat(getFiles(all.css[key], cwd));
+        }
+    }
     return {js: js, css: css};
 }
 
@@ -123,7 +123,7 @@ function getFiles(mixed, cwd) {
     var files = [];
     if (Array.isArray(mixed)) {
         for (var i = 0, l = mixed.length; i < l; i++) {
-            files.concat(getFiles(mixed[i], cwd));
+            files = files.concat(getFiles(mixed[i], cwd));
         }
     } else if (typeof(mixed) === 'string') {
         if (mixed.indexOf('*') === -1) files.push(mixed);

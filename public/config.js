@@ -36,8 +36,8 @@
             ).constant('Config', config.appConstants);
 
             application = angular.module(
-                module.applicationConfig.applicationName,
-                module.applicationConfig.applicationDependencies
+                config.applicationName,
+                config.applicationDependencies
             );
             application.requires.push(controller.getModuleName('config'));
             return application;
@@ -76,4 +76,4 @@
     /** Expose controller **/
     module.AppCtrl = controller;
 
-})(window, angular, appLocals);
+})(window, window.angular, window.AppLocals);

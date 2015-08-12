@@ -4,10 +4,10 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title= locals.title
         each cssFile in assets.css
-            link(rel="text/css" href="!{cssFile}")
+            link(rel="text/css" href="#{cssFile}")
         script(type="text/javascript").
-            var AppLocals = !{JSON.stringify(locals)};
+            window.AppLocals = !{JSON.stringify(locals)};
     body
         each jsFile in assets.js
-            script(type="text/javascript" src="!{jsFile}")
+            script(type="text/javascript" src="#{jsFile}")
         block content

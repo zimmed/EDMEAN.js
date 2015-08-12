@@ -1,6 +1,6 @@
 'use strict';
 
-(function (ctrl) {
+(function (ctrl, io) {
 
     ctrl.getModule('core').service('Socket', ['Config', '$timeout',
         function (Config, $timeout) {
@@ -30,4 +30,4 @@
         }
     ]);
 
-})(window.AppCtrl);
+})(window.AppCtrl, window.io);
