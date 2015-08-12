@@ -33,10 +33,17 @@ module.exports = (function (appState) {
 
             publicStatic: 'public',
             resource: {
-                'base': 'res',
-                'core' : 'res/core'
+                'icon': 'res/icons',
+                'font': 'res/fonts',
+                'image': 'res/images',
+                'style': 'res/styles',
+                'script': 'res/scripts',
+                'data': 'res/json',
+                'bower': 'lib'
             },
             favicon: 'favicon.ico',
+            sassScss: 'sass',
+            sassMain: 'main',
 
             locals: {
                 title: 'EDMEAN.js Application',
@@ -51,6 +58,7 @@ module.exports = (function (appState) {
 
             /** Default Methods **/
             resourcePath: function (module, file) {
+                if (!file) file = '';
                 return path.join(this.basePath, this.publicStatic, this.resource[module], file);
             },
             getUrl: function () {
