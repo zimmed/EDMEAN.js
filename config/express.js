@@ -25,6 +25,7 @@ module.exports = function (mongooseConnection) {
     var server;
 
     _.extend(app.locals, config.locals);
+    app.locals.baseUrl = ((config.secure) ? 'https:' : 'http:') + config.baseUrl;
     app.locals.port = config.serverPort;
     app.locals.secure = config.secure;
     app.locals.angularAppName = config.angularAppName;

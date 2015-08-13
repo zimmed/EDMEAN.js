@@ -23,6 +23,7 @@
         },
 
         appConstants: {
+            baseUrl: appLocals.baseUrl,
             secure: appLocals.secure,
             port: appLocals.port,
             title: appLocals.title,

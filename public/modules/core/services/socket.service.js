@@ -4,7 +4,7 @@
 
     ctrl.getModule('core').service('Socket', ['Config', '$timeout',
         function (Config, $timeout) {
-            var address = ((Config.secure) ? 'https:' : 'http:') + '//localhost:' + Config.port;
+            var address = Config.baseUrl + Config.port;
 
             this.socket = io(address);
 
