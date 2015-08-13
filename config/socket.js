@@ -31,6 +31,7 @@ module.exports = function (server, mongooseConnection) {
                                 if (err) return next(err);
                                 // userData bellow is written once the Express session is created
                                 if (session) {
+                                    socket.session = session;
                                     return next();
                                 } else {
                                     return next(new Error('Invalid Session'));
